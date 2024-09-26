@@ -76,7 +76,7 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-  let deleteButtonTrans = 'delete selected'
+  let deleteButtonTrans = 'hapus dipilih'
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.categories.mass_destroy') }}",
@@ -86,10 +86,10 @@
           return $(entry).data('entry-id')
       });
       if (ids.length === 0) {
-        alert('zero selected')
+        alert('tidak ada yang dipilih')
         return
       }
-      if (confirm('are you sure ?')) {
+      if (confirm('apakah anda yakin ?')) {
         $.ajax({
           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
           method: 'POST',
