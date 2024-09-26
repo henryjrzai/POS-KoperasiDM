@@ -4,20 +4,20 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-   
+
 
     <!-- Content Row -->
         <div class="card">
             <div class="card-header py-3 d-flex">
                 <h6 class="m-0 font-weight-bold text-primary">
-                    {{ __('product') }}
+                    {{ __('produk') }}
                 </h6>
                 <div class="ml-auto">
                     <a href="{{ route('admin.products.create') }}" class="btn btn-primary">
                         <span class="icon text-white-50">
                             <i class="fa fa-plus"></i>
                         </span>
-                        <span class="text">{{ __('New product') }}</span>
+                        <span class="text">{{ __('Tambah produk') }}</span>
                     </a>
                 </div>
             </div>
@@ -31,12 +31,12 @@
                                 </th>
                                 <th>No</th>
                                 <th>Barcode</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Category</th>
-                                <th>Quantity</th>
-                                <th>Image</th>
-                                <th>Action</th>
+                                <th>Nama</th>
+                                <th>Harga</th>
+                                <th>Kategori</th>
+                                <th>Stok</th>
+                                <th>Gambar</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,7 +47,7 @@
                                 </td>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($product->code, 'C39',1,33,array(1,1,1), true) }}" 
+                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($product->code, 'C39',1,33,array(1,1,1), true) }}"
                                 alt="{{ $product->code }}"
                                 width="100"
                                 height="40">
@@ -70,7 +70,7 @@
                                         <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-info">
                                             <i class="fa fa-pencil-alt"></i>
                                         </a>
-                                        <form onclick="return confirm('are you sure ? ')" class="d-inline" action="{{ route('admin.products.destroy', $product->id) }}" method="POST">
+                                        <form onclick="return confirm('apakah anda yakin ? ')" class="d-inline" action="{{ route('admin.products.destroy', $product->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">
@@ -82,7 +82,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="9" class="text-center">{{ __('Data Empty') }}</td>
+                                <td colspan="9" class="text-center">{{ __('data produk tidak ada') }}</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -99,7 +99,7 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-  let deleteButtonTrans = 'delete selected'
+  let deleteButtonTrans = 'hapus dipilih'
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.products.mass_destroy') }}",
@@ -109,10 +109,10 @@
           return $(entry).data('entry-id')
       });
       if (ids.length === 0) {
-        alert('zero selected')
+        alert('tidak ada dipilih')
         return
       }
-      if (confirm('are you sure ?')) {
+      if (confirm('apakah anda yakin ?')) {
         $.ajax({
           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
           method: 'POST',

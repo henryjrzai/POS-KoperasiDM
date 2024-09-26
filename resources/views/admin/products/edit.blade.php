@@ -18,8 +18,8 @@
         <div class="card shadow">
             <div class="card-header">
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">{{ __('edit product')}}</h1>
-                    <a href="{{ route('admin.products.index') }}" class="btn btn-primary btn-sm shadow-sm">{{ __('Go Back') }}</a>
+                    <h1 class="h3 mb-0 text-gray-800">{{ __('edit produk')}}</h1>
+                    <a href="{{ route('admin.products.index') }}" class="btn btn-primary btn-sm shadow-sm">{{ __('kembali') }}</a>
                 </div>
             </div>
             <div class="card-body">
@@ -27,11 +27,11 @@
                     @csrf
                     @method('put')
                     <div class="form-group">
-                        <label for="name">{{ __('name') }}</label>
+                        <label for="name">{{ __('nama') }}</label>
                         <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $product->name) }}" />
                     </div>
                     <div class="form-group">
-                        <label for="category">{{ __('category') }}</label>
+                        <label for="category">{{ __('kategori') }}</label>
                         <select name="category_id" id="category" class="form-control">
                             @foreach($categories as $id => $categoryName)
                             <option {{ $id == $product->category->name }} value="{{ $id }}">{{ $categoryName }}</option>
@@ -39,25 +39,25 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="price">{{ __('price') }}</label>
+                        <label for="price">{{ __('harga') }}</label>
                         <input type="number" class="form-control" id="price" name="price" value="{{ old('price', $product->price) }}" />
                     </div>
                     <div class="form-group">
-                        <label for="quantity">{{ __('quantity') }}</label>
+                        <label for="quantity">{{ __('jumlah stok') }}</label>
                         <input type="number" class="form-control" id="quantity" name="quantity" value="{{ old('quantity', $product->quantity) }}" />
                     </div>
                     <div class="form-group">
-                        <label for="image">image</label>
+                        <label for="image">gambar</label>
                         <div class="needsclick dropzone" id="image-dropzone">
 
                         </div>
                         @error('image')<span class="text-danger">{{ $message }}</span>@enderror
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">{{ __('Save')}}</button>
+                    <button type="submit" class="btn btn-primary btn-block">{{ __('simpan')}}</button>
                 </form>
             </div>
         </div>
-    
+
 
     <!-- Content Row -->
 
@@ -69,7 +69,7 @@
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 @endpush
 
-@push('script-alt')   
+@push('script-alt')
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script>
     Dropzone.options.imageDropzone = {
