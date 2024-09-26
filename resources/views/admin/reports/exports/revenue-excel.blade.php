@@ -1,19 +1,19 @@
 <table>
     <thead>
         <th>No</th>
-        <th>Date</th>
-        <th>Total Revenue</th>
+        <th>Tanggal</th>
+        <th>Total Pendapatan</th>
     </thead>
     <tbody>
         @forelse ($reports as $report)
-            <tr>    
+            <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $report['date'] }}</td>
-                <td>${{ $report['revenue'] }}</td>
+                <td>Rp. {{ $report['revenue'] }}</td>
             </tr>
         @empty
             <tr>
-                <td>No records found</td>
+                <td>Tidak ada data</td>
             </tr>
         @endforelse
 
@@ -21,7 +21,7 @@
             <tr>
                 <td>Total</td>
                 <td></td>
-                <td><strong>${{ number_format($total_revenue,2) }}</strong></td>
+                <td><strong>Rp. {{ number_format($total_revenue,2) }}</strong></td>
             </tr>
         @endif
     </tbody>

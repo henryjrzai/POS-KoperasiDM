@@ -2,7 +2,7 @@
 <html>
   	<head>
 		<meta charset="utf-8">
-		<title>Revenue Reprot</title>
+		<title>Laporan Pendapatan</title>
 		<style type="text/css">
 			table {
 				width: 100%;
@@ -33,25 +33,25 @@
 		</style>
 	</head>
   	<body>
-		<h2>Revenue Report</h2>
+		<h2>Laporan Pendapatan</h2>
 		<hr>
-		<p>Period : {{ $endDate }} - {{ $startDate }}</p>
+		<p>Periode : {{ $endDate }} - {{ $startDate }}</p>
 		<table class="table table-bordered table-striped">
             <thead>
                 <th>No</th>
-                <th>Date</th>
-                <th>Total Revenue</th>
+                <th>Tannggal</th>
+                <th>Total Pendapatan</th>
             </thead>
             <tbody>
                 @forelse ($reports as $report)
-                    <tr>    
+                    <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $report['date'] }}</td>
-                        <td>${{ $report['revenue'] }}</td>
+                        <td>Rp. {{ $report['revenue'] }}</td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6">No records found</td>
+                        <td colspan="6">tidak ada data ditemukan</td>
                     </tr>
                 @endforelse
 
@@ -59,7 +59,7 @@
                     <tr>
                         <td>Total</td>
                         <td></td>
-                        <td><strong>${{ number_format($total_revenue,2) }}</strong></td>
+                        <td><strong>Rp. {{ number_format($total_revenue,2) }}</strong></td>
                     </tr>
                 @endif
             </tbody>
