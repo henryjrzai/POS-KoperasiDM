@@ -1,16 +1,11 @@
-# Laravel 8 - Point of Sale Application
-
-## Screenshots
-
-![preview img](/preview.png)
-![preview img](/preview2.png)
+# Laravel 8 - Point of Sale Application (Koperasi Deli Murni)
 
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://github.com/abdulaziz-m5u/laravel-pos-app.git project-name
+  git clone https://github.com/henryjrzai/POS-KoperasiDM.git project-name
 ```
 
 Go to the project directory
@@ -31,6 +26,10 @@ Go to the project directory
 
 ```bash
     php artisan migrate:fresh --seed
+```
+
+```bash
+    php artisan storage:link
 ```
 
 #### Login
