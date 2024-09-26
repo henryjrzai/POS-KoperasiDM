@@ -17,7 +17,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                               User</div>
+                               Pengguna</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $users }}</div>
                         </div>
                         <div class="col-auto">
@@ -35,7 +35,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Transaction</div>
+                                Jumlah Transaksi</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $transactions }}</div>
                         </div>
                         <div class="col-auto">

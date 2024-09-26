@@ -10,7 +10,7 @@ use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
-   
+
     public function index(): View
     {
         $categories = Category::all();
@@ -28,7 +28,7 @@ class CategoryController extends Controller
         Category::create($request->validated());
 
         return redirect()->route('admin.categories.index')->with([
-            'message' => 'successfully created !',
+            'message' => 'berhasil ditambahkan !',
             'alert-type' => 'success'
         ]);
     }
@@ -48,7 +48,7 @@ class CategoryController extends Controller
         $category->update($request->validated());
 
         return redirect()->route('admin.categories.index')->with([
-            'message' => 'successfully updated !',
+            'message' => 'berhasil updated !',
             'alert-type' => 'info'
         ]);
     }
@@ -58,7 +58,7 @@ class CategoryController extends Controller
         $category->delete();
 
         return back()->with([
-            'message' => 'successfully deleted !',
+            'message' => 'berhasil dihapus !',
             'alert-type' => 'danger'
         ]);
     }

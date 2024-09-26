@@ -4,20 +4,20 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-   
+
 
     <!-- Content Row -->
         <div class="card">
             <div class="card-header py-3 d-flex">
                 <h6 class="m-0 font-weight-bold text-primary">
-                    {{ __('category') }}
+                    {{ __('Kategori Produk') }}
                 </h6>
                 <div class="ml-auto">
                     <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">
                         <span class="icon text-white-50">
                             <i class="fa fa-plus"></i>
                         </span>
-                        <span class="text">{{ __('New category') }}</span>
+                        <span class="text">{{ __('Tambah kategori') }}</span>
                     </a>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                                         <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-info">
                                             <i class="fa fa-pencil-alt"></i>
                                         </a>
-                                        <form onclick="return confirm('are you sure ? ')" class="d-inline" action="{{ route('admin.categories.destroy', $category->id) }}" method="POST">
+                                        <form onclick="return confirm('apakah anda yakin ? ')" class="d-inline" action="{{ route('admin.categories.destroy', $category->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">
@@ -59,7 +59,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7" class="text-center">{{ __('Data Empty') }}</td>
+                                <td colspan="7" class="text-center">{{ __('Data Kosong') }}</td>
                             </tr>
                             @endforelse
                         </tbody>
