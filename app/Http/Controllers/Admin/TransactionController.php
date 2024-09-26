@@ -20,7 +20,7 @@ class TransactionController extends Controller
         $params = $request->all();
 
         $transaction = \DB::transaction(function() use ($params) {
-            
+
             $transactionParams = [
                 'transaction_code' => 'P100' . mt_rand(1,1000),
                 'name' => auth()->user()->name,
@@ -48,31 +48,31 @@ class TransactionController extends Controller
 					];
 
 					$orderItem = TransactionDetail::create($orderItemParams);
-					
+
 					if ($orderItem) {
 						$product = Product::findOrFail($cart->product_id);
 						$product->quantity -= $cart->quantity;
 						$product->save();
                     }
-                    
+
                     $cart->delete();
 				}
             }
-            
+
             return $transaction;
         });
 
 
-        
+
 		if ($transaction) {
 			return redirect()->route('admin.transactions.show', $transaction->id)->with([
-				'message' => 'Success order',
+				'message' => 'transaksi sukses',
 				'alert-type' => 'success'
 			]);
 		}
-    }  
-    
-    
+    }
+
+
     public function show(Transaction $transaction){
         return view('admin.transactions.show', compact('transaction'));
     }
@@ -80,17 +80,17 @@ class TransactionController extends Controller
 
 
     public function destroy(Transaction $transaction){
-       
+
         $transaction->delete();
 
         return redirect()->back()->with([
-            'message' => 'success delete',
+            'message' => 'berhasil dihapus',
             'alert-type' => 'danger'
         ]);
     }
 
-    public function print_struck(Transaction $transaction){        
-        
+    public function print_struck(Transaction $transaction){
+
         return view('admin.transactions.nota', compact('transaction'));
     }
 }

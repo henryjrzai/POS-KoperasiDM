@@ -4,13 +4,13 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-   
+
 
     <!-- Content Row -->
         <div class="card">
             <div class="card-header py-3 d-flex">
                 <h6 class="m-0 font-weight-bold text-primary">
-                    {{ __('transaction') }}
+                    {{ __('Transaksi') }}
                 </h6>
             </div>
             <div class="card-body">
@@ -22,11 +22,11 @@
 
                                 </th>
                                 <th>No</th>
-                                <th>Date</th>
+                                <th>Tanggal</th>
                                 <th>Code</th>
-                                <th>Name</th>
-                                <th>Total Price</th>
-                                <th>Action</th>
+                                <th>Nama Produk</th>
+                                <th>Total Harga</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,13 +39,13 @@
                                 <td>{{ $transaction->created_at }}</td>
                                 <td>{{ $transaction->transaction_code }}</td>
                                 <td>{{ $transaction->name }}</td>
-                                <td>${{ $transaction->total_price }}</td>
+                                <td>Rp. {{ $transaction->total_price }}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
                                         <a href="{{ route('admin.transactions.show', $transaction->id) }}" class="btn btn-info">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        <form onclick="return confirm('are you sure ? ')" class="d-inline" action="{{ route('admin.transactions.destroy', $transaction->id) }}" method="POST">
+                                        <form onclick="return confirm('apakah anda yakin ? ')" class="d-inline" action="{{ route('admin.transactions.destroy', $transaction->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">
@@ -57,9 +57,9 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7" class="text-center">{{ __('Data Empty') }}</td>
+                                <td colspan="7" class="text-center">{{ __('Data transaksi kosong') }}</td>
                             </tr>
-                            @endforelse      
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -74,7 +74,7 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-  let deleteButtonTrans = 'delete selected'
+  let deleteButtonTrans = 'hapus dipilih'
   let deleteButton = {
     text: deleteButtonTrans,
     url: "",
@@ -84,10 +84,10 @@
           return $(entry).data('entry-id')
       });
       if (ids.length === 0) {
-        alert('zero selected')
+        alert('tidak ada data yang dipilih')
         return
       }
-      if (confirm('are you sure ?')) {
+      if (confirm('apakah anda yakin ?')) {
         $.ajax({
           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
           method: 'POST',

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Nota Kecil</title>
+    <title>Nota Transaksi</title>
 
     <?php
     $style = '
@@ -30,11 +30,11 @@
         @media print {
             @page {
                 margin: 0;
-                size: 75mm 
+                size: 75mm
     ';
     ?>
-    <?php 
-    $style .= 
+    <?php
+    $style .=
         ! empty($_COOKIE['innerHeight'])
             ? $_COOKIE['innerHeight'] .'mm; }'
             : '}';
@@ -57,8 +57,8 @@
 <body onload="window.print()">
     <button class="btn-print" style="position: absolute; right: 1rem; top: rem;" onclick="window.print()">Print</button>
     <div class="text-center">
-        <h3 style="margin-bottom: 5px;">Nama Perusahaan</h3>
-        <p>Alamat</p>
+        <h3 style="margin-bottom: 5px;">Koperasi Deli Murni</h3>
+        <p>Jl. Bandar Baru, Sikeben, Kec. Sibolangit, Kabupaten Deli Serdang</p>
     </div>
     <br>
     <div>
@@ -68,7 +68,7 @@
     <div class="clear-both" style="clear: both;"></div>
     <p>No: {{ $transaction->transaction_code }}</p>
     <p class="text-center">===================================</p>
-    
+
     <br>
     <table width="100%" style="border: 0;">
         @foreach ($transaction->transaction_details as $transaction_detail)
@@ -90,11 +90,11 @@
             <td class="text-right">{{ $transaction->total_price }}</td>
         </tr>
         <tr>
-            <td>Accept:</td>
+            <td>Diterima:</td>
             <td class="text-right">{{ $transaction->accept }}</td>
         </tr>
         <tr>
-            <td>Return:</td>
+            <td>Dikembalikan:</td>
             <td class="text-right">{{ $transaction->return }}</td>
         </tr>
     </table>

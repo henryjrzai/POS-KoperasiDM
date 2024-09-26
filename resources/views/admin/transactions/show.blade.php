@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="container-fluid">
-    
+
     <div class="card">
         <div class="card-header">
             <h6 class="m-0 font-weight-bold text-primary">
-                {{ __('List Product') }}
+                {{ __('List produk') }}
                 <a href="{{ route('admin.transactions.index') }}" class="btn btn-dark float-right">
-                    <span class="text">{{ __('Go Back') }}</span>
+                    <span class="text">{{ __('kembali') }}</span>
                 </a>
             </h6>
         </div>
@@ -19,8 +19,8 @@
                         <tr>
                             <th>#</th>
                             <th>Item</th>
-                            <th>Quantity</th>
-                            <th>Unit Cost</th>
+                            <th>Jumlah</th>
+                            <th>Harga</th>
                             <th>Total</th>
                         </tr>
                     </thead>
@@ -30,12 +30,12 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->qty }}</td>
-                                <td>${{ $item->base_price }}</td>
-                                <td>${{ $item->base_total }}</td>
+                                <td>Rp. {{ $item->base_price }}</td>
+                                <td>Rp. {{ $item->base_total }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6">Order item not found!</td>
+                                <td colspan="6">data tidak ditemukan!</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -43,8 +43,8 @@
             </div>
         </div>
         <div class="card-footer text-right">
-            <h3>Total : ${{ $transaction->total_price }}</h3>
-            <button class="btn btn-success" onclick="notaKecil('{{ route('admin.transactions.print_struck', $transaction->id) }}', 'print_struck')">Print</button>
+            <h3>Total : Rp. {{ $transaction->total_price }}</h3>
+            <button class="btn btn-success" onclick="notaKecil('{{ route('admin.transactions.print_struck', $transaction->id) }}', 'print_struck')">Cetak</button>
         </div>
     </div>
 </div>
@@ -55,7 +55,7 @@
 <script>
     // tambahkan untuk delete cookie innerHeight terlebih dahulu
     document.cookie = "innerHeight=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    
+
     function notaKecil(url, title) {
         popupCenter(url, title, 625, 500);
     }
@@ -70,12 +70,12 @@
         const systemZoom = width / window.screen.availWidth;
         const left       = (width - w) / 2 / systemZoom + dualScreenLeft
         const top        = (height - h) / 2 / systemZoom + dualScreenTop
-        const newWindow  = window.open(url, title, 
+        const newWindow  = window.open(url, title,
         `
             scrollbars=yes,
-            width  = ${w / systemZoom}, 
-            height = ${h / systemZoom}, 
-            top    = ${top}, 
+            width  = ${w / systemZoom},
+            height = ${h / systemZoom},
+            top    = ${top},
             left   = ${left}
         `
         );
