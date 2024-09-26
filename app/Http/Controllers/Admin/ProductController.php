@@ -14,7 +14,7 @@ use Illuminate\Http\RedirectResponse;
 class ProductController extends Controller
 {
     use MediaUploading;
-   
+
     public function index(): View
     {
         $products = Product::all();
@@ -38,7 +38,7 @@ class ProductController extends Controller
         }
 
         return redirect()->route('admin.products.index')->with([
-            'message' => 'successfully created !',
+            'message' => 'berhasil ditambah !',
             'alert-type' => 'success'
         ]);
     }
@@ -69,7 +69,7 @@ class ProductController extends Controller
         }
 
         return redirect()->route('admin.products.index')->with([
-            'message' => 'successfully updated !',
+            'message' => 'berhasil di edit !',
             'alert-type' => 'info'
         ]);
     }
@@ -79,7 +79,7 @@ class ProductController extends Controller
         $product->delete();
 
         return back()->with([
-            'message' => 'successfully deleted !',
+            'message' => 'berhasil dihapus !',
             'alert-type' => 'danger'
         ]);
     }
@@ -93,7 +93,7 @@ class ProductController extends Controller
 
     public function search(Request $request){
         $products = Product::where('name', 'like', '%' . $request->search . '%')->get();
-        
+
         return json_encode($products);
     }
 }
