@@ -12,7 +12,7 @@
                             class="form-control productCode"
                             placeholder="Scan Barcode..."
                         />
-                        <button class="btn btn-sm rounded btn-success scan">Find</button>
+                        <button class="btn btn-sm rounded btn-success scan">Cari</button>
                     </form>
                 </div>
             </div>
@@ -21,9 +21,9 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Product Name</th>
-                                <th>Quantity</th>
-                                <th class="text-right">Price</th>
+                                <th>Nama Produk</th>
+                                <th>Jumlah</th>
+                                <th class="text-right">Harga</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <form action="{{ route('admin.transactions.store') }}" method="post">
-                @csrf 
+                @csrf
                 <div class="row mt-2">
                     <div class="col">Total:</div>
                     <div class="col text-right">
@@ -46,8 +46,8 @@
                     </div>
                 </div>
                 <div class="row my-2">
-                    <div class="col">Return:</div>
-                    <div class="col text-right"> 
+                    <div class="col">Dikembalikan:</div>
+                    <div class="col text-right">
                         <input type="number" value="" name="return" readonly class="form-control return">
                     </div>
                 </div>
@@ -57,15 +57,16 @@
                             type="button"
                             class="btn btn-danger btn-block"
                         >
-                            Cancel
+                            Batal
                         </button>
                     </div>
                     <div class="col">
                         <button
+                            id="pay"
                             type="submit"
                             class="btn btn-primary btn-block"
                         >
-                            Pay
+                            Bayar
                         </button>
                     </div>
                 </div>
@@ -76,7 +77,7 @@
                 <input
                     type="text"
                     class="form-control search"
-                    placeholder="Search Product..."
+                    placeholder="Cari produk..."
                 />
             </div>
             <div class="order-product product-search" style="display: flex;column-gap: 0.5rem;flex-wrap: wrap;row-gap: .5rem;">
@@ -90,7 +91,7 @@
                         <img src="{{ $product->image->getUrl() }}" width="45px" height="45px" alt="test" />
                         @endif
                         <h6 style="margin: 0;">{{ $product->name }}</h6>
-                        <span >(${{ $product->price }})</span>
+                        <span >Rp. {{ $product->price }}</span>
                     </button>
                 @endforeach
             </div>
@@ -112,7 +113,7 @@
                         let total = 0;
                         $('tbody').html("");
                         $.each(response.carts, function(key,product) {
-                            total += product.price * product.quantity                            
+                            total += product.price * product.quantity
                             $('tbody').append(`
                             <tr>
                                 <td>${product.name}</td>
@@ -133,13 +134,13 @@
                                         type="button"
                                         class="btn btn-danger btn-sm delete"
                                         value="${product.id}"
-                                        
+
                                     >
                                     <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
                                 <td class="text-right">
-                                $${ product.quantity * product.price}
+                                Rp. ${ product.quantity * product.price}
                                 </td>
                             </tr>
                             `)
@@ -156,19 +157,22 @@
                 const received = $(this).val();
                 const total = $('.total').val();
                 const subTotal = received - total;
-                const change = $('.return').val(subTotal);            
+                const change = $('.return').val(subTotal);
+                if(received < total){
+                    alert('Uang yang diterima kurang');
+                }
             })
 
             $(document).on('change', '.qty', function() {
                 const qty = $(this).val();
                 const cartId = $(this).closest('td').find('.cartId').val();
-                
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                
+
                 $.ajax({
                     type: 'put',
                     url: `carts/${cartId}`,
@@ -188,13 +192,13 @@
             $(document).on('keyup', '.search', function() {
                 const search = $(this).val();
 
-                
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                
+
                 $.ajax({
                     type: 'post',
                     url: `products/search`,
@@ -204,7 +208,7 @@
                     dataType: 'json',
                     success: function(response) {
                         $('.product-search').html("");
-                        $.each(response, function(key,product) {                      
+                        $.each(response, function(key,product) {
                             $('.product-search').append(`
                             <button type="button"
                                 class="item"
@@ -212,7 +216,7 @@
                                 value="${product.id}"
                             >
                                 <img src="http://127.0.0.1:8000/storage/${product.image.id}/${product.image.file_name}" width="45px" height="45px" alt="test" />
-                               
+
                                 <h6 style="margin: 0;">${product.name}</h6>
                                 <span >(${product.price})</span>
                             </button>
@@ -224,7 +228,7 @@
 
             $(document).on('click', '.delete', function() {
                 const cartId = $(this).val();
-                
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
